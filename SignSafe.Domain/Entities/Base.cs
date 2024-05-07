@@ -1,11 +1,15 @@
-﻿namespace SignSafe.Domain.Entities
+﻿using System.Text.Json.Serialization;
+
+namespace SignSafe.Domain.Entities
 {
     public abstract class Base
     {
         public long Id { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
-        public DateTime LastUpdated { get; protected set; }
+        public DateTime? UpdatedAt { get; protected set; }
+        [JsonIgnore]
         public DateTime? DeletedAt { get; protected set; }
+        [JsonIgnore]
         public bool Deleted { get; protected set; }
 
         public void SetCreatedAt()
@@ -13,9 +17,9 @@
             CreatedAt = DateTime.Now;
         }
 
-        public void SetLastUpdated()
+        public void SetUpdatedAt()
         {
-            LastUpdated = DateTime.Now;
+            UpdatedAt = DateTime.Now;
         }
 
         public void SetDeletedAt()
@@ -24,5 +28,4 @@
             Deleted = true;
         }
     }
-
 }

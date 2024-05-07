@@ -2,8 +2,7 @@
 
 namespace SignSafe.Domain.RepositoryInterfaces
 {
-    public interface IUserRepository
+    public interface IUserRepository : IRepository<User>
     {
-        Task<List<User>> GetUsers();
     }
 }
