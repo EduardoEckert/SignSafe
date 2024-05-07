@@ -5,17 +5,15 @@ using SignSafe.Domain.RepositoryInterfaces;
 
 namespace SignSafe.Data.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : Repository<User>, IUserRepository
     {
-        private readonly MyContext _dbContext;
-        public UserRepository(MyContext dbContext)
+        public UserRepository(MyContext context) : base(context)
         {
-            _dbContext = dbContext;
         }
 
-        public async Task<List<User>> GetUsers()
+        public async Task<List<User>> GetAllUser()
         {
-            return await _dbContext.Set<User>().AsNoTracking().ToListAsync();
+            return await _context.Set<User>().ToListAsync();
         }
     }
 }

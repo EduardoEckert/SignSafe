@@ -15,6 +15,8 @@ namespace SignSafe.Data.Context
         {
             base.OnModelCreating(builder);
             builder.ApplyConfiguration(new UserConfig());
+
+            builder.Entity<User>().HasQueryFilter(x => !x.Deleted);
         }
     }
 }
