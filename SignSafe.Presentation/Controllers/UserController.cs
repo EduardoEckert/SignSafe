@@ -9,7 +9,7 @@ using SignSafe.Application.Users.Queries.GetAll;
 
 namespace SignSafe.Presentation.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/users")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -22,10 +22,9 @@ namespace SignSafe.Presentation.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        [Route("get-all")]
-        public async Task<IActionResult> GetAll()
+        [Route("get-by-filter:paginated")]
+        public async Task<IActionResult> GetByFilter([FromQuery] GetUsersByFilterQuery query)
         {
-            GetAllUserQuery query = new GetAllUserQuery();
             var result = await _mediator.Send(query);
             return Ok(result);
         }
@@ -44,8 +43,8 @@ namespace SignSafe.Presentation.Controllers
         [Route("insert")]
         public async Task<IActionResult> Insert([FromBody] InsertUserCommand command)
         {
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            await _mediator.Send(command);
+            return Ok();
         }
 
         [AllowAnonymous]
@@ -53,8 +52,8 @@ namespace SignSafe.Presentation.Controllers
         [Route("update")]
         public async Task<IActionResult> Update([FromBody] UpdateUserCommand command)
         {
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            await _mediator.Send(command);
+            return Ok();
         }
 
         [AllowAnonymous]
@@ -62,8 +61,8 @@ namespace SignSafe.Presentation.Controllers
         [Route("delete")]
         public async Task<IActionResult> Delete([FromBody] DeleteUserCommand command)
         {
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            await _mediator.Send(command);
+            return Ok();
         }
     }
 }

@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using SignSafe.Data.UoW;
-using SignSafe.Domain.Entities;
+using SignSafe.Domain.Dtos.Users;
 
 namespace SignSafe.Application.Users.Queries.Get
 {
-    public class GetUserQueryHandler : IRequestHandler<GetUserQuery, User>
+    public class GetUserQueryHandler : IRequestHandler<GetUserQuery, UserDto>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -13,11 +13,11 @@ namespace SignSafe.Application.Users.Queries.Get
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
-        public async Task<User> Handle(GetUserQuery request, CancellationToken cancellationToken)
+        public async Task<UserDto> Handle(GetUserQuery request, CancellationToken cancellationToken)
         {
             var user = await _unitOfWork.UserRepository.Get(request.UserId);
 
-            return user;
+            return new UserDto(user);
         }
     }
 }

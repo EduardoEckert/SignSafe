@@ -3,7 +3,7 @@ using SignSafe.Domain.Dtos.Users;
 
 namespace SignSafe.Application.Users.Commands.Update
 {
-    public class UpdateUserCommand : IRequest<Unit>
+    public class UpdateUserCommand : IRequest
     {
         public long UserId { get; set; }
         public required UserDto UserDto { get; set; }

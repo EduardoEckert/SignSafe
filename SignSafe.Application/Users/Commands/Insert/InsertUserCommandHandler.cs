@@ -4,7 +4,7 @@ using SignSafe.Domain.Entities;
 
 namespace SignSafe.Application.Users.Commands.Insert
 {
-    public class InsertUserCommandHandler : IRequestHandler<InsertUserCommand, Unit>
+    public class InsertUserCommandHandler : IRequestHandler<InsertUserCommand>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -13,7 +13,7 @@ namespace SignSafe.Application.Users.Commands.Insert
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
-        public async Task<Unit> Handle(InsertUserCommand request, CancellationToken cancellationToken)
+        public async Task Handle(InsertUserCommand request, CancellationToken cancellationToken)
         {
             var user = new User(request.UserDto);
             try
@@ -26,7 +26,7 @@ namespace SignSafe.Application.Users.Commands.Insert
                 throw;
             }
 
-            return await Task.FromResult(Unit.Value);
+            return;
         }
     }
 }
