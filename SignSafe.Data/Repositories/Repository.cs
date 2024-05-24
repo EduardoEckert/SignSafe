@@ -15,11 +15,6 @@ namespace SignSafe.Data.Repositories
             _dbSet = _context.Set<TEntity>();
         }
 
-        public async virtual Task<List<TEntity>> GetAll()
-        {
-            return await _dbSet.ToListAsync();
-        }
-
         public async virtual Task<TEntity> Get(long id)
         {
             return await _context.Set<TEntity>().FirstOrDefaultAsync(x => x.Id == id);
