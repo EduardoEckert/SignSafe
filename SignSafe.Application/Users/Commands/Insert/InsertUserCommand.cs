@@ -5,6 +5,6 @@ namespace SignSafe.Application.Users.Commands.Insert
 {
     public class InsertUserCommand : IRequest
     {
-        public required UserDto UserDto { get; set; }
+        public required InsertUserDto InsertUserDto { get; set; }
     }
 }

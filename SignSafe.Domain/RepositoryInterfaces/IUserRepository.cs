@@ -7,5 +7,6 @@ namespace SignSafe.Domain.RepositoryInterfaces
     public interface IUserRepository : IRepository<User>
     {
         Task<RepositoryPaginatedResult<User>> GetByFilter(UsersFilterDto filter, Pagination pagination);
+        Task<User?> GetByEmail(string email);
     }
 }
