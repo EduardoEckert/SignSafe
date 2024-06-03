@@ -8,6 +8,7 @@ namespace SignSafe.Domain.Entities
 {
     public class User : Base
     {
+        public User() { }
         public User(InsertUserDto insertUserDto)
         {
             Name = insertUserDto.Name;
