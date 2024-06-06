@@ -32,8 +32,10 @@ namespace SignSafe.Application.Auth
             {
                 new Claim("userId", user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Role, user.Roles)
             };
+
+            var roleList = user.Roles.Split(',').ToList();
+            roleList.ForEach(role => claims.Add(new Claim(ClaimTypes.Role, role)));
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

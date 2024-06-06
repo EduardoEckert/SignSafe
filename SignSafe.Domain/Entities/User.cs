@@ -2,7 +2,6 @@
 using SignSafe.Domain.Dtos.Users;
 using SignSafe.Domain.Enums.Users;
 using SignSafe.Domain.Extensions;
-using System.Text;
 
 namespace SignSafe.Domain.Entities
 {
@@ -34,15 +33,7 @@ namespace SignSafe.Domain.Entities
 
         public void UpdateRoles(List<UserRoles> roles)
         {
-            var roleList = new StringBuilder();
-            roles
-                .Distinct()
-                .ToList()
-                .ForEach(x => roleList.Append($"{x.GetDescription()}, "));
-
-            roleList.Remove(roleList.Length - 2, 1);
-
-            Roles = roleList.ToString();
+            Roles = string.Join(",", roles.Distinct());
         }
 
         public void EncryptUserPassword()

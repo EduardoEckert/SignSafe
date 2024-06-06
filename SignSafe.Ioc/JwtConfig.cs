@@ -14,7 +14,7 @@ namespace SignSafe.Ioc
             service.AddAuthentication(p =>
             {
                 p.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                p.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                p.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
                 .AddJwtBearer(p =>
                 {

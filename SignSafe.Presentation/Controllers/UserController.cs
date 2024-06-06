@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SignSafe.Application.Auth;
 using SignSafe.Application.Users.Commands.Delete;
 using SignSafe.Application.Users.Commands.Insert;
 using SignSafe.Application.Users.Commands.Update;
@@ -8,6 +9,7 @@ using SignSafe.Application.Users.Commands.UpdateRole;
 using SignSafe.Application.Users.Queries.Get;
 using SignSafe.Application.Users.Queries.GetAll;
 using SignSafe.Application.Users.Queries.Login;
+using SignSafe.Presentation.Attributes;
 
 namespace SignSafe.Presentation.Controllers
 {
@@ -48,7 +50,7 @@ namespace SignSafe.Presentation.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Roles(RolesScheme.Admin)]
         [HttpPost]
         [Route("insert")]
         public async Task<IActionResult> Insert([FromBody] InsertUserCommand command)
@@ -65,7 +67,7 @@ namespace SignSafe.Presentation.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "Admin")]
+        [Roles(RolesScheme.Admin)]
         [HttpPut]
         [Route("update-roles")]
         public async Task<IActionResult> UpdateRoles([FromQuery] UpdateUserRolesCommand command)
@@ -74,8 +76,7 @@ namespace SignSafe.Presentation.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "Admin")]
-        [AllowAnonymous]
+        [Roles(RolesScheme.Admin)]
         [HttpDelete]
         [Route("delete")]
         public async Task<IActionResult> Delete([FromBody] DeleteUserCommand command)
