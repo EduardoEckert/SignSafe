@@ -2,7 +2,7 @@
 ![SignSafe](https://github.com/EduardoEckert/SignSafe/assets/89213922/6633e139-4cf6-41ff-ba04-4bc983607b3f)
 
 > Status : Developing 
-## It is a web application, responsible for creation, updation, visualization and deletion users. You be able to log in securely, management users, and attribute roles for each one.
+## It is a web application, responsible for create, update, visualize and delete users. You be able to log in securely, management users, and attribute roles for each one.
 
 knowledge acquired/used in this project:
 ### Architetural pattern
