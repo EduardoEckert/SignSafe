@@ -1,10 +1,36 @@
+using Microsoft.OpenApi.Models;
 using SignSafe.Data.Context;
 using SignSafe.Ioc;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddJwtConfiguration(builder.Configuration);
+builder.Services.AddSwaggerGen(c =>
+{
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Insert the token",
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+                new string[]{}
+        }
+    });
+
+});
 
 //Add DependencyInjection
 DependencyInjection.AddDependencyInjection(builder);

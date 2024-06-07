@@ -30,5 +30,10 @@ namespace SignSafe.Data.Repositories
 
             return new RepositoryPaginatedResult<User>(result, count);
         }
+
+        public async Task<User?> GetByEmail(string email)
+        {
+            return await _context.Set<User>().AsNoTracking().FirstOrDefaultAsync(x => x.Email == email);
+        }
     }
 }

@@ -4,11 +4,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SignSafe.Application.Auth;
 using SignSafe.Application.Users.Commands.Delete;
 using SignSafe.Application.Users.Commands.Insert;
 using SignSafe.Application.Users.Commands.Update;
+using SignSafe.Application.Users.Commands.UpdateRole;
 using SignSafe.Application.Users.Queries.Get;
 using SignSafe.Application.Users.Queries.GetAll;
+using SignSafe.Application.Users.Queries.Login;
 using SignSafe.Data.Context;
 using SignSafe.Data.Repositories;
 using SignSafe.Data.UoW;
@@ -30,6 +33,7 @@ namespace SignSafe.Ioc
             AddRepositories(builder.Services);
             AddCommands(builder.Services);
             AddQueries(builder.Services);
+            AddServices(builder.Services);
         }
 
         private static void AddInfrastructure(WebApplicationBuilder builder)
@@ -59,6 +63,7 @@ namespace SignSafe.Ioc
             //User
             services.AddScoped<IRequestHandler<InsertUserCommand>, InsertUserCommandHandler>();
             services.AddScoped<IRequestHandler<UpdateUserCommand>, UpdateUserCommandHandler>();
+            services.AddScoped<IRequestHandler<UpdateUserRolesCommand>, UpdateUserRolesCommandHandler>();
             services.AddScoped<IRequestHandler<DeleteUserCommand>, DeleteUserCommandHandler>();
         }
 
@@ -67,6 +72,14 @@ namespace SignSafe.Ioc
             //User
             services.AddScoped<IRequestHandler<GetUsersByFilterQuery, PaginatedResult<List<UserDto>>>, GetUsersByFilterQueryHandler>();
             services.AddScoped<IRequestHandler<GetUserQuery, UserDto>, GetUserQueryHandler>();
+            services.AddScoped<IRequestHandler<LoginUserQuery, string>, LoginUserQueryHandler>();
+
+        }
+
+        private static void AddServices(IServiceCollection services)
+        {
+            //User
+            services.AddTransient<IJwtService, JwtService>();
         }
     }
 }
